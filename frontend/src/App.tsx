@@ -46,7 +46,6 @@ export default function App() {
     }
   };
 
-
   useEffect(() => {
     checkHealth();
     loadMessages();
@@ -99,26 +98,30 @@ export default function App() {
       <section>
         <h2>スレッド一覧</h2>
         <div id="thread-list">
-          {error === "404" ? (//new
-          <p style={{ color: "#888" }}>まだサポートされていません</p>
-        ) : (
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {messages.length === 0 ? (
-              <li style={{ color: "#888" }}>まだメッセージはありません</li>
-            ) : (
-              messages.map((m) => (
-                  <a href={`/threads/${m.thread}`} style={{margin: "0.5rem 0 0", whiteSpace: "pre-wrap" }}>
+          {error === "404" ? ( //new
+            <p style={{ color: "#888" }}>まだサポートされていません</p>
+          ) : (
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {messages.length === 0 ? (
+                <li style={{ color: "#888" }}>まだメッセージはありません</li>
+              ) : (
+                messages.map((m, index) => (
+                  <a
+                    href={`/threads/${m.thread}`}
+                    style={{ margin: "0.5rem 0 0", whiteSpace: "pre-wrap" }}
+                    key={`threadlink-${index}`}
+                  >
                     {m.thread}
                   </a>
-              ))
-            )}
-          </ul>
-        )}
+                ))
+              )}
+            </ul>
+          )}
         </div>
         <form
           onSubmit={submit}
           style={{
-            padding:"20px 0 0 0",
+            padding: "20px 0 0 0",
             display: "flex",
             flexDirection: "column",
             gap: "0.5rem",
